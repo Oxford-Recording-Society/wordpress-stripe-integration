@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WP Stripe Integration by ORS
  * Plugin URI:  https://github.com/Oxford-Recording-Society/ors-wp-stripe-integration
- * Description: Display a listing of posts using the [display-posts] shortcode
+ * Description: Handle Stripe webhook events to activate members etc.
  * Version:     0.1
  * Author:      @samboyer / Oxford Recording Society
  * Author URI:  https://github.com/Oxford-Recording-Society
