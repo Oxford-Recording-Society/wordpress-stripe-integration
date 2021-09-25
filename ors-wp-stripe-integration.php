@@ -49,12 +49,12 @@ function ors_wp_stripe_handle_event(WP_REST_Request $request) {
       array('status' => 401));
   }
 
-  if ($request->get_header('Content-Type') != 'application/json') {
+  if (explode(';', $request->get_header('Content-Type'))[0] != 'application/json') {
     ors_wp_stripe_log(
       "ERROR: Got an authenticated request that wasn't application/json?? (was "
       . $request->get_header('Content-Type') . ")");
     return new WP_Error('invalid_content_type',
-      'Invalid content type (application/json expected)',
+      'Invalid content type (\'application/json\' expected)',
       array('status' => 400));
   }
 
