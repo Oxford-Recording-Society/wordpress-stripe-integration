@@ -17,7 +17,6 @@
  * @license     http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
-
 // Define the REST API endpoint
 add_action( 'rest_api_init', function () {
   register_rest_route( 'ors-wp-stripe-integration/v1', '/event', array(
@@ -29,6 +28,8 @@ add_action( 'rest_api_init', function () {
 
 // Define callback function
 function ors_wp_stripe_handle_event(WP_REST_Request $request) {
+  require 'SECRET_KEY';
+
   if (!$request->get_header('Stripe-Signature')) {
     ors_wp_stripe_log(
       "WARN: Request was made without a Stripe-Signature header");
@@ -39,7 +40,7 @@ function ors_wp_stripe_handle_event(WP_REST_Request $request) {
   if (!ors_wp_stripe_verify_signature(
     $request->get_header('Stripe-Signature'),
     $request->get_body(),
-    file_get_contents(__DIR__ . '/SECRET_KEY'),
+    $SECRET_KEY,
   )) {
     ors_wp_stripe_log(
       "BIG WARN: Invalid Stripe-Signature header (\'"

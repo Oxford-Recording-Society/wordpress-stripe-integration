@@ -10,8 +10,8 @@ but this could be extended to support a whole range of actions!
 
 ## Installation/Setup
 * Clone this repo into your wp-content/plugins directory
-* Replace the text in 'SECRET_KEY' with your Stripe
-'webhook signing secret' key (which you can create [here](https://dashboard.stripe.com/webhooks/create))
+* Paste your Stripe 'webhook signing secret' key (which you can create
+[here](https://dashboard.stripe.com/webhooks/create)) into SECRET_KEY file (L20)
 
 ## To-do
 * Move the constants (secret key, product ID) to the database, and edit them via
