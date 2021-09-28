@@ -86,7 +86,7 @@ function ors_wp_stripe_handle_event(WP_REST_Request $request) {
       "WARN: Tried to approve $billing_email, but the user didn't exist");
     return new WP_Error('user_missing',
       "There isn't an associated user for this email address",
-      array('status' => 404));
+      array('status' => 200));
   }
 
   # Check if user is approved
@@ -99,7 +99,7 @@ function ors_wp_stripe_handle_event(WP_REST_Request $request) {
       . "), but they were already approved");
     return new WP_Error('user_already_approved',
     "This user is already approved! Are you sure they're meant to pay membership twice?",
-    array('status' => 400));
+    array('status' => 200));
   }
 
   $ultimatemember->user()->approve($user->id);
