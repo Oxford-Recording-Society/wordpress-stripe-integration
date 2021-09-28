@@ -1,0 +1,3 @@
+<?php
+$LOG_EMAIL = 'paste an email address to send events to here';
+?>

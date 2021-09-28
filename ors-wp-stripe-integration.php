@@ -145,4 +145,9 @@ function ors_wp_stripe_log($log) {
   }
   $str .= " (". date("Y-m-d H:i:s") . ")\n";
   error_log($str, 3, __DIR__ . "/ors-wp-stripe.log");
+
+  require 'LOG_EMAIL';
+  if (strpos($LOG_EMAIL, '@') !== false) {
+    wp_mail($LOG_EMAIL, "Message from ORS WP Stripe Integration", $str);
+  }
 }
