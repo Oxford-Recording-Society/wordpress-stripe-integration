@@ -106,7 +106,7 @@ function ors_wp_stripe_handle_event(WP_REST_Request $request) {
 
   $message = "INFO: Approved membership for " . um_user('display_name') . " ($billing_email)!";
 
-  ors_wp_stripe_log($message);
+  ors_wp_stripe_log($message, false);
   return $message;
 }
 
@@ -137,7 +137,7 @@ function ors_wp_stripe_verify_signature($signature_header, $payload_json,
   return $hmac_hex == $v1_hash;
 }
 
-function ors_wp_stripe_log($log) {
+function ors_wp_stripe_log($log, $should_email = true) {
   if (is_array($log) || is_object($log)) {
     $str = print_r($log, true);
   } else {
@@ -147,7 +147,7 @@ function ors_wp_stripe_log($log) {
   error_log($str, 3, __DIR__ . "/ors-wp-stripe.log");
 
   require 'LOG_EMAIL';
-  if (strpos($LOG_EMAIL, '@') !== false) {
+  if ($should_email && strpos($LOG_EMAIL, '@') !== false) {
     wp_mail($LOG_EMAIL, "Message from ORS WP Stripe Integration", $str);
   }
 }
